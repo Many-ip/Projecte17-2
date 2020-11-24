@@ -27,13 +27,15 @@ p)
   PORTDB=$OPTARG
   if [ $PORTDB -lt 1204 ] || [ $PORTDB -gt 65535 ] 
   then
+	echo "PORT is invalid"
+	echo
 	usage
 	exit 1
   fi	
 ;;
 
 t)
-  CONN="$HOSTDB:$PORTDB"
+ 
   nc -vz $HOSTDB $PORTDB >&/dev/null
   if [ $? -eq 0 ]	 
     then
@@ -45,19 +47,19 @@ fi
 ;;
 
 \?)
-echo "ERROR: Invalid option -$OPTARG" 1>&2
-echo 
-usage
-exit 1
+    echo "ERROR: Invalid option -$OPTARG" 1>&2
+    echo 
+    usage
+    exit 1
 ;;
 
 :)
-            echo "ERROR: Option -$OPTARG requires an argument"
-            usage
-            ;;
+    echo "ERROR: Option -$OPTARG requires an argument"
+    usage
+    ;;
 esac
 done
-shift $((OPTIND-1))
+
 if [ -z "${HOSTDB}" ] || [ -z "${USERDB}" ]
-then usage 
-fi
+   then usage 
+   fi
