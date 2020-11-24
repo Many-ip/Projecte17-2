@@ -17,3 +17,7 @@ Hay que clonar el repositorio:
 git clone https://github.com/Many-ip/Projecte17-2
 ```
 ## Funcionalidad 👨🏽‍💻
+```
+./conndb.sh -u usuario -h host [-p puerto <1025|65535>] [-t]
+```
+Es obligatorio el uso de los argumentos -u y -h. en caso de poner -p y no dar argumento se quejara que no ha indicado el puerto, pero por defecto entendera que querra hacer una conexion al 3306
