@@ -33,15 +33,17 @@ p)
 ;;
 
 t)
-
-$(nc -vz $HOSTDB $PORTDB)
-;;
-
-:)
+CONN="$HOSTDB:$PORTDB"
+nc -vz $HOSTDB $PORTDB >&/dev/null
+if [ $? -eq 0 ]	 
+then
+echo "PORT is open. Test if this port is mysql"
+else
 echo "ERROR: Option -$OPTARG requires an argument" 1>&2
 echo
 usage
 exit 1
+fi
 ;;
 
 \?)
@@ -51,6 +53,10 @@ usage
 exit 1
 ;;
 
+:)
+            echo "ERROR: Option -$OPTARG requires an argument"
+            usage
+            ;;
 esac
 done
 shift $((OPTIND-1))
