@@ -4,7 +4,7 @@ nomscript=$0 # $0 es el nom del programa
 PORTDB=3306
 function usage(){
 cat << EFO
-Usage: $nomscript [-u usuari] [-h hostname] [-t]
+Usage: $nomscript [-u usuari] [-h hostname] [-p port] [-t]
    -u   usuari de la base de dades (obligatori)
    -h   hostname on es connectarà (obligatori
    -p   port (no obligatori ja que per defecte és 3306, però si existeix ha de ser un numero superior a 1024 i inferior o igual a 65535)
@@ -33,16 +33,14 @@ p)
 ;;
 
 t)
-CONN="$HOSTDB:$PORTDB"
-nc -vz $HOSTDB $PORTDB >&/dev/null
-if [ $? -eq 0 ]	 
-then
-echo "PORT is open. Test if this port is mysql"
-else
-echo "ERROR: Option -$OPTARG requires an argument" 1>&2
-echo
-usage
-exit 1
+  CONN="$HOSTDB:$PORTDB"
+  nc -vz $HOSTDB $PORTDB >&/dev/null
+  if [ $? -eq 0 ]	 
+    then
+        echo "PORT is open. Test if this port is mysql"
+    else
+    echo "PORT is close" 
+    exit 1
 fi
 ;;
 
