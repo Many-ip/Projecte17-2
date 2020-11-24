@@ -62,4 +62,7 @@ done
 
 if [ -z "${HOSTDB}" ] || [ -z "${USERDB}" ]
    then usage 
-   fi
+else
+   echo "Test to do:"
+   echo "mysql -u$USERDB -p[password] -h$HOSTDB -P$PORTDB" 
+fi
